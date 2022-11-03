@@ -15,6 +15,7 @@ export default function NavBar() {
             </li>
             {!user && <li onClick={login}>Login/Signup</li>}
             {user && <li>{user.email}</li>}
+            {user && <li>{user.user_metadata.full_name}</li>}
             {user && <li onClick={logout}>Logout</li>}
           </ul>
         )}
