@@ -2,19 +2,22 @@ import { useContext } from "react";
 import AuthContext from "../stores/authContext";
 
 export default function NavBar() {
-  const { user, login, logout } = useContext(AuthContext);
+  const { user, login, logout, authReady } = useContext(AuthContext);
   console.log(user);
   return (
     <div>
       <nav>
         <h1>Autenticacion</h1>
-        <ul>
-          <li>
-            <a>Ingresar</a>
-          </li>
-          <li onClick={login}>Login/Signup</li>
-          <li onClick={logout}>Logout</li>
-        </ul>
+        {authReady && (
+          <ul>
+            <li>
+              <a>Ingresar</a>
+            </li>
+            {!user && <li onClick={login}>Login/Signup</li>}
+            {user && <li>{user.email}</li>}
+            {user && <li onClick={logout}>Logout</li>}
+          </ul>
+        )}
       </nav>
     </div>
   );
